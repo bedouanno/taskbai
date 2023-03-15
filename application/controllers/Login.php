@@ -5,6 +5,8 @@ Class Login extends CI_Controller {
 
 // Check for user login process
 public function index() {
+    $this->load->helper("ipblocker_helper");
+    block_ip();
     $data['sitename'] = 'TaskBai 1.0';
 
     $this->form_validation->set_rules('email_address', 'Email Address', 'trim|required');
@@ -49,6 +51,8 @@ public function index() {
 
 // Logout from admin page
 public function logout($page = 'logout') {
+    $this->load->helper("ipblocker_helper");
+    block_ip();
     $data['sitename'] = 'TaskBai 0.1';
     // Removing session data
     $sess_array = array('email_address' => '');

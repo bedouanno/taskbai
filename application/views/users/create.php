@@ -1,22 +1,24 @@
-<!-- Begin Page Content -->
+<!-- MAIN CONTENT-->
+<div class="main-content">
+<div class="section__content section__content--p30">
 <div class="container-fluid">
+    <!-- Page Heading -->
+<!-- /////////////////////////////////////////// -->
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <h6 class="m-0 h1 font-weight-bold text-primary">Create User</h6>
-    </div>
-    <div class="card-body">
-        
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+          <div class="card border border-success">
+            <div class="card-header">
+                <strong class="card-title">Create User
+                    <!-- <small>
+                        <span class="badge badge-danger float-right mt-1">49</span>
+                    </small> -->
+                </strong>
+            </div>
+            <div class="card-body">
 
-
-<?php if(!empty(validation_errors())): ?>
-<div class="alert alert-dismissible alert-primary">
-<!--  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
-    <strong><?php echo validation_errors(); ?></strong>
-</div>
-<?php endif; ?>
-
-<?php echo form_open('user/create'); ?>
+            <?php echo form_open('user/create'); ?>
   <fieldset>
     <div class="row">
       <div class="form-group col-sm-6">
@@ -31,7 +33,7 @@
     <div class="row">
     <div class="form-group col-sm-6">
       <label for="exampleSelect1" class="form-label mt-4">Position</label>
-      <select class="form-select" id="exampleSelect1" required name="position">
+      <select class="form-select form-control-sm form-control" id="exampleSelect1" required name="position" >
             <option value="">Select position</option>
             <?php foreach ($positions as $position): ?>
             <option value="<?php echo $position['position_name']; ?>"><?php echo $position['position_name']; ?></option>
@@ -53,10 +55,21 @@
     <button type="submit" class="btn btn-primary  mt-4">Save</button>
   </fieldset>
 </form>
-</div>
+
+            </div>
+        </div>
+        
+        
+
+
+    </div>
 </div>
 
+<!-- ////////////////////////////////////////// -->
 </div>
+</div>
+</div>
+<!-- /.container-fluid -->
 <!-- /.container-fluid -->
 
 <!--

@@ -1,4 +1,5 @@
-<!-- Begin Page Content -->
+<div class="main-content">
+<div class="section__content section__content--p30">
 <div class="container-fluid">
 
 <div class="card shadow mb-4">
@@ -65,5 +66,7 @@
 </div>
 </div>
 
+</div>
+</div>
 </div>
 <!-- /.container-fluid -->

@@ -10,25 +10,36 @@ class Clients extends CI_Controller {
             'robots' => 'noindex,nofollow',
             'user_info' => $this->users_model->get_user_session($this->session->userdata('logged_in')['email_address']),
             'task_status' => array("Pending","Break","Inprogress","For QA", "Completed", "Checking"),
+            'ip_blocker' => $this->load->helper("ipblocker_helper")
         );
     } 
 
+    public function session_users(){
+        if(!isset($this->session->userdata['logged_in']) && !isset($_SESSION["logged_in"])){ 
+            redirect('/logout');
+        }
+    }
+    
     public function index(){
-            $data = $this->user_info;
+        block_ip();
+        $data = $this->user_info;
+        $this->session_users();
 
-            $data['stat'] = array("Pages","Launched","Layout");
-            $data['title'] = "Clients List"; 
-            $data['clients'] = $this->client_model->get_clients(); 
+        $data['stat'] = array("Pages","Launched","Layout");
+        $data['title'] = "Clients List"; 
+        $data['clients'] = $this->client_model->get_clients(); 
 
-            $this->load->view('templates/head', $data);
-            $this->load->view('templates/sidebar');
-            $this->load->view('templates/header',$data);
-            $this->load->view('clients/index', $data);
-            $this->load->view('templates/footer');
+        $this->load->view('templates/head', $data);
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/header',$data);
+        $this->load->view('clients/index', $data);
+        $this->load->view('templates/footer');
     }
 
     public function view($id =  NULL){
         $data = $this->user_info;
+        $this->session_users();
+
         $data['websitefiles_stat'] = array("Reset","Used");
  
         $data['client'] = $this->client_model->get_client($id);
@@ -75,6 +86,9 @@ class Clients extends CI_Controller {
 
     public function create(){
         $data = $this->user_info;
+        $role = $data['user_info']['role'];
+        if($role == 2){ redirect('/');}
+        $this->session_users();
           
         $this->form_validation->set_rules('company_name','Company Name','required|is_unique[users.first_name]');
         $this->form_validation->set_rules('contact_person','Contact Information','required');
@@ -105,6 +119,9 @@ class Clients extends CI_Controller {
 
     public function update($id =  NULL){
         $data = $this->user_info;
+        $role = $data['user_info']['role'];
+        if($role == 2){ redirect('/');}
+        $this->session_users();
           
         $this->form_validation->set_rules('company_name','Company Name','required|is_unique[users.first_name]');
         $this->form_validation->set_rules('contact_person','Contact Information','required');
@@ -139,6 +156,11 @@ class Clients extends CI_Controller {
     }
     
         public function delete($id =  NULL){
+            $data = $this->user_info;
+            $role = $data['user_info']['role'];
+            if($role == 2){ redirect('/');}
+            $this->session_users();
+            
             $data['clients'] = $this->client_model->get_client($id);
             if(empty($data['clients'])){
 
@@ -150,5 +172,6 @@ class Clients extends CI_Controller {
             
             redirect('clients');
         }
+
 
 }

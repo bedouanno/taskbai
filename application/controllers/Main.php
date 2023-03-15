@@ -3,8 +3,11 @@
 class Main extends CI_Controller {
 
     var $user_info;
+   
+
     function __construct(){
         parent::__construct(); // needed when adding a constructor to a controller
+       
         
         $this->user_info = array(
             'sitename' => 'TaskBai 1.0',
@@ -14,11 +17,17 @@ class Main extends CI_Controller {
         
         
 
-    }    
+    }
+    
+    public function session_users(){
+        if(!isset($this->session->userdata['logged_in']) && !isset($_SESSION["logged_in"])){ 
+            redirect('/logout');
+        }
+    }
 
     public function view($page = 'home'){
-            $data = $this->user_info;
-			
+        $data = $this->user_info;
+        $this->session_users();
 		
             $data['number_users'] = $this->users_model->user_count();
             $data['number_tasks'] = $this->tasks_model->task_count();
@@ -30,6 +39,8 @@ class Main extends CI_Controller {
             
         
             if($page == 'home'){
+
+                
                 $data['title'] = ucfirst($page); // Capitalize the first letter
                 $this->load->view('templates/head', $data);
                 $this->load->view('templates/sidebar');

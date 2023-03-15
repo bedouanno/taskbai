@@ -118,7 +118,6 @@ $autoload['config'] = array();
 */
 $autoload['language'] = array();
 
-
 date_default_timezone_set('Asia/Manila');
 
 /*
@@ -134,4 +133,4 @@ date_default_timezone_set('Asia/Manila');
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('login_model','users_model','positions_model','client_model','tasks_model');
+$autoload['model'] = array('login_model','users_model','positions_model','client_model','tasks_model','attendance_model','activity_model');

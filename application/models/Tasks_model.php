@@ -124,6 +124,7 @@ class Tasks_model extends CI_Model {
 		
         $data = array(
             'task_url' => $this->input->post('task_url'),
+            'task_backup' => $this->input->post('task_backup'),
             'next_steps' => $this->input->post('next_steps'),
             'additional_notes' => $this->input->post('additional_notes')
         );
@@ -135,11 +136,21 @@ class Tasks_model extends CI_Model {
         return 1;
     }
 
+    public function update_task_qa($id = FALSE, $postValue = FALSE){
+		
+        $this->db->set($postValue);
+        $this->db->where('tasks.id', $id);
+        $this->db->update('tasks');
+
+        return 1;
+    }
+
 
 
     public function post_update_task(){
         $data = array(
             'task_url' => $this->input->post('task_url'),
+            'task_backup' => $this->input->post('task_backup'),
             'next_steps' => $this->input->post('next_steps'),
             'additional_notes' => $this->input->post('additional_notes')
         );
@@ -195,10 +206,12 @@ class Tasks_model extends CI_Model {
 		
         $data = array(
             'task_url' => $this->input->post('task_url'),
+            'task_backup' => $this->input->post('task_backup'),
             'next_steps' => $this->input->post('next_steps'),
             'additional_information' => $this->input->post('additional_information')
         );
-
+        // print_r($data);
+        // exit;
         return $this->db->insert('tasks', $data);
     }
 
@@ -223,6 +236,25 @@ class Tasks_model extends CI_Model {
         return 1;
     }
     
+
+    public function update_task_attachment($id = FALSE, $postValue = FALSE){
+
+        $data = $postValue;
+		
+        $this->db->set($data);
+        $this->db->where('tasks.id', $id);
+        $this->db->update('tasks');
+
+
+        return 1;
+    }
+
+
+    public function get_task_attachment($id = FALSE){
+        $query = $this->db->get_where('tasks', array('id' => $id));
+        return $query->row_array();
+    }
+
     public function create_time_start($id = FALSE, $postValue = FALSE){
         $data = $postValue;
         return $this->db->insert('time_progress_start', $data);
@@ -272,5 +304,100 @@ class Tasks_model extends CI_Model {
      }
 
 
+    public function create_error($post_value){
+    return $this->db->insert('tasks_errors', $post_value);
+    }
+
+    public function add_task_error($post_value){
+        return $this->db->insert('task_qa', $post_value);
+    }
+
+
+    public function get_errors($categ){
+        if($categ === FALSE){
+            $query = $this->db->get('tasks_errors');
+            return $query->result_array();
+        }
+        $query = $this->db->get_where('tasks_errors', array('error_category' => $categ));
+
+        return $query->result_array();
+    }
+
+
+    public function get_errors_with_id($id){
+        if($id === FALSE){
+            $query = $this->db->get('tasks_errors');
+            return $query->result_array();
+        }
+        $query = $this->db->get_where('tasks_errors', array('id' => $id));
+
+        return $query->result_array();
+    }
+
+
+    public function get_errors_task($id){
+        if($id === FALSE){
+            $query = $this->db->get('task_qa');
+            return $query->result_array();
+        }
+        $query = $this->db->get_where('task_qa', array('qas_id' => $id));
+        return $query->result_array();
+    }
+
+    public function get_errors_task_qa($id,  $task_id){
+        $query = $this->db->get_where('task_qa', array('qas_id' => $id, 'task_id' => $task_id));
+        return $query->row_array();
+    }
+
+
+    public function get_qa_id($id, $task_id){
+        $query = $this->db->get_where('task_qa', array('qas_id' => $id, 'task_id' => $task_id));
+        return $query->row_array();
+    }
+
+
+
+
+    public function get_task_errors($id){
+        if($id === FALSE){
+            $query = $this->db->get('task_qa');
+            return $query->result_array();
+        }
+
+        $this->db->select('*');
+        $this->db->from('task_qa');
+        $this->db->where('task_id', $id);
+        $this->db->join('tasks', 'tasks.id = task_qa.task_id');
+        $this->db->join('tasks_errors', 'tasks_errors.id = task_qa.qas_id');
+        $query = $this->db->get();
+
+        // $query = $this->db->get_where('task_qa', array('qas_id' => $id));
+        return $query->result_array();
+    }
+
+
+    public function update_task_error($id = NULL, $task_prog = NULL) {
+        $ps = $task_prog;
+        $this->db->set('task_qa', $ps);
+        $this->db->where('task_qa.id', $id);
+        $this->db->update('task_qa');
+        $result =  $this->db->affected_rows(); 
+        return $result;
+     }
+
+     public function delete_task_qa($task_id, $rs_id){
+        $this->db->where('task_qa.task_id', $task_id);
+        $this->db->where_not_in('id', $rs_id);
+        $this->db->delete('task_qa');
+        $result = $this->db->affected_rows(); 
+        return $result;
+    }
+
+    public function delete_task_qav2($task_id){
+        $this->db->where('task_qa.task_id', $task_id);
+        $this->db->delete('task_qa');
+        $result = $this->db->affected_rows(); 
+        return $result;
+    }
 
 }

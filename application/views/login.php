@@ -1,22 +1,14 @@
-<div class="container">
-
-<!-- Outer Row -->
-<div class="row justify-content-center">
-
-
-    <div class="col-xl-10 col-lg-12 col-md-9">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
-                    <div class="col-lg-12">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Welcome to TaskBai!</h1>
-                            </div>
-                                <?php if(!empty(validation_errors())): ?>
+<div class="page-wrapper">
+        <div class="page-content--bge5">
+            <div class="container">
+                <div class="login-wrap">
+                    <div class="login-content">
+                        <div class="login-logo">
+                            <a href="#">
+                                <img src="<?php echo base_url(); ?>/assetsv2/images/icon/logo.png" alt="CoolAdmin">
+                            </a>
+                        </div>
+                        <?php if(!empty(validation_errors())): ?>
                             <div class="alert alert-dismissible alert-primary">
                             <!--  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>-->
                                 <strong><?php echo validation_errors(); ?></strong>
@@ -28,23 +20,27 @@
                                 <div class="alert alert-dismissible alert-primary">
                                 <strong><?php echo $errors['error_message']; ?></strong>
                                 
-                            </div>
+                                </div>
                             
                             <?php endif; ?>
+                        <div class="login-form">
                             <?php echo form_open('login'); ?>
                                 <div class="form-group">
-                                    <input type="email" name="email_address" class="form-control form-control-user"
-                                        id="exampleInputEmail" aria-describedby="emailHelp"
-                                        placeholder="Enter Email Address">
+                                    <label>Email Address</label>
+                                    <input class="au-input au-input--full" type="email" name="email_address" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control form-control-user"
-                                        id="exampleInputPassword" placeholder="Password">
+                                    <label>Password</label>
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
                                 </div>
-                                <input type="submit" class="btn btn-primary btn-user btn-block" value="Login" name="login">
-            
+                                <!-- <div class="login-checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember">Remember Me
+                                    </label>
+                                </div> -->
+                                <!-- <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">sign in</button> -->
+                                <input type="submit" class="au-btn au-btn--block au-btn--green m-b-20" value="sign in" name="login">
                             </form>
-
                         </div>
                     </div>
                 </div>
@@ -52,7 +48,3 @@
         </div>
 
     </div>
-
-</div>
-
-</div>

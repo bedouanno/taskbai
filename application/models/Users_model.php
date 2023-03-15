@@ -9,8 +9,13 @@ class Users_model extends CI_Model {
             return $query->result_array();
         }
 
-        $query = $this->db->get_where('users', array('id' => id));
+        $query = $this->db->get_where('users', array('id' => $id));
         return $query->row_array();
+    }
+
+    public function get_users_developer(){
+        $query = $this->db->get_where('users', array('role' => 2));
+        return $query->result_array();
     }
     
     

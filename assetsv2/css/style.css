@@ -1,0 +1,22 @@
+
+.bg-dark-opacity{background: rgba(0,0,0,.6);}
+
+
+.hvr-underline:hover{text-decoration: underline; color: #63c76a !important;}
+
+
+/* 
+'task_status' => array("Pending","Break","Inprogress","For QA", "Completed", "Checking"), */
+
+.badge-status0{color: #fff; background-color: #f39c12 ;}
+.badge-status1{color: #fff; background-color: #dc3545;}
+.badge-status2{color: #fff; background-color: #00c0ef;}
+.badge-status3{color: #fff; background-color: #00c0ef;}
+.badge-status4{color: #fff; background-color: #00a65a;}
+.badge-status5{color: #fff; background-color: #605ca8;}
+
+
+.counternumber{counter-reset: section;}
+.counternumber button span::after{  counter-increment: section; content: counter(section);}
+
+

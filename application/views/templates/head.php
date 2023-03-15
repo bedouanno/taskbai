@@ -2,33 +2,45 @@
 <html lang="en">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
 
-    <title><?php echo $sitename; ?></title>
+    <!-- Title Page-->
+    <title>TaskBai 2</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo base_url(); ?>/assetsv2/images/icon/logo-mini.png">
+    <!-- Fontfaces CSS-->
+    <link href="<?php echo base_url(); ?>/assetsv2/css/font-face.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
-    <!-- Custom fonts for this template-->
-    <link href="<?php echo base_url(); ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-    rel="stylesheet">
-    <link href="https://bootswatch.com/5/yeti/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <!-- Custom styles for this template-->
-    <link href="<?php echo base_url(); ?>/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS-->
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 
-    <!-- Custom styles for this page -->
-    <link href="<?php echo base_url(); ?>/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Vendor CSS-->
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
 
-                    <!-- Custom styles for this page -->
-    <link href="<?php echo base_url(); ?>/assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
+    <!-- Main CSS-->
+    <link href="<?php echo base_url(); ?>/assetsv2/css/theme.css" rel="stylesheet" media="all">
+    <link href="<?php echo base_url(); ?>/assetsv2/css/style.css" rel="stylesheet" media="all">
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/sweet-modal/jquery.sweet-modal.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
 
+
+   
+<link  rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"
+/>
 <!-- CSS -->
 <style>
 
@@ -45,20 +57,25 @@
 #CreateInstructions .modal-dialog, #TaskURL .modal-dialog{position: relative;background-color: #fefefe;margin: auto;    margin-bottom: auto;margin-bottom: 50px;width: 100%;max-width: 930px;background: linear-gradient(137deg,#c90505 0,#ef7d0a 37%,#7ec123 64%,#a88d00 100%);border: 3px solid #cb0a05;padding: 15px 0 0;-webkit-animation-name: animatetop;-webkit-animation-duration: .4s;animation-name: animatetop;animation-duration: .4s;}
 
 #TaskURL{display: none; position: fixed; z-index: 3; padding: 50px 15px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: #000; background-color: rgba(0,0,0,.4);	}
-#TaskURL .modal-dialog{position: relative;background-color: #fefefe;margin: auto;    margin-bottom: auto;margin-bottom: 50px;width: 100%;max-width: 930px;background: linear-gradient(137deg,#c90505 0,#ef7d0a 37%,#7ec123 64%,#a88d00 100%);border: 3px solid #cb0a05;padding: 15px 0 0;-webkit-animation-name: animatetop;-webkit-animation-duration: .4s;animation-name: animatetop;animation-duration: .4s;}
+#TaskURL .modal-dialog{position: relative;background-color: #fefefe;margin: auto;    margin-bottom: auto;margin-bottom: 50px;width: 100%;max-width: 930px;border: 3px solid #cb0a05;padding: 15px 0 0;-webkit-animation-name: animatetop;-webkit-animation-duration: .4s;animation-name: animatetop;animation-duration: .4s;}
 
 #btnEditModal{display: none; position: fixed; z-index: 3; padding: 50px 15px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: #000; background-color: rgba(0,0,0,.4);	}
 #btnEditModal .modal-dialog{position: relative;background-color: #fefefe;margin: auto; margin-bottom: auto;margin-bottom: 50px;width: 100%;max-width: 930px;-webkit-animation-name: animatetop;-webkit-animation-duration: .4s;animation-name: animatetop;animation-duration: .4s; border-radius: 15px; overflow: hidden}
+.pe-auto{cursor: pointer !important; -webkit-transition: all .3s linear; transition: all .3s linear;}
+.pe-auto:hover{opacity: .8;}
 
 .content-custom{}
 .content-custom p{margin: 0 !important; }
 .content-custom *{font-family: inherit;}
 
+.checkbox input[checked]: {
+    background: red !important;
+}
+
 </style>
 
 </head>
 
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+<body class="animsition">
+    <div class="page-wrapper">
+<!-- PAGE CONTAINER-->

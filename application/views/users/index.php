@@ -1,44 +1,55 @@
-<!-- Begin Page Content -->
+<!-- MAIN CONTENT-->
+<div class="main-content">
+<div class="section__content section__content--p30">
 <div class="container-fluid">
     <!-- Page Heading -->
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <div class="row">
-                <h1 class="m-0 h1 font-weight-bold text-primary col align-self-start"><?= $title; ?> list</h1>
-                <a href="<?php echo base_url(); ?>user/create" class="btn btn-info col-sm-1 align-self-end"><i class="fas fa-plus fa-fw mr-2"></i>Add User</a>
-            </div> 
+
+    <div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+        <div class="d-flex flex-row justify-content-end mb-2">                                    
+            <a href="<?php echo base_url(); ?>user/create" class="au-btn au-btn-icon au-btn--green au-btn--small"><i class="zmdi zmdi-plus"></i>Add User</a>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Position</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Position</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
+
+        <div class="card border border-success">
+            <div class="card-header">
+                <strong class="card-title"><?php echo $title; ?>
+                    <small>
+                        <span class="badge badge-danger float-right mt-1">49</span>
+                    </small>
+                </strong>
+            </div>
+            <div class="card-body">
+            <div class="table-responsive table-responsive-data1">
+            <table class="table table-borderless table-data3" id="userTables">
+                <thead class="bg-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                <tbody>
                     <?php foreach ($users as $user):?>
                         <tr>
-                        <td><?php echo $user['id']?></td>
-                            <td><a href="<?php echo base_url(); ?>user/<?php echo $user['id']?>"><?php echo $user['first_name'].' '.$user['last_name']?></a></td>
+                        <td style="width: 20px;"><?php echo $user['id']?></td>
+                            <td><a class="text-black-50 hvr-underline"  href="<?php echo base_url(); ?>user/<?php echo $user['id']?>"><?php echo $user['first_name'].' '.$user['last_name']?></a></td>
                             <td><?php echo $user['position']?></td>
                         </tr>
                         <?php endforeach;?>
                     </tbody>
-                </table>
+            </table>
+        </div>
             </div>
         </div>
-    </div>
+        
+        
 
+
+    </div>
+</div>
+
+</div>
+</div>
 </div>
 <!-- /.container-fluid -->

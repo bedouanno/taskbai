@@ -1,20 +1,28 @@
-<!-- Begin Page Content -->
-<div class="container-fluid">
-    <!-- Page Heading -->
-    <div class="row mb-4">
-        <h1 class="m-0 h1 font-weight-bold text-primary col align-self-start"><?= $title; ?></h1>
-        <span class="h5 col-sm-4 align-self-end text-right">
-            <?php $createdDates = new DateTime($current_datetime);
-            $createdDateFormats = date_format($createdDates, 'F d, Y - g:i a');
-            echo $createdDateFormats;?>
-        </span>
-    </div>
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
+
+
+                   <!-- MAIN CONTENT-->
+                   <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title"><?= $title; ?>
+                    <small>
+                        <!-- <span class="badge badge-danger float-right mt-1"><?php //echo $this->tasks_model->task_count(); ?></span> -->
+                        <span class="badge badge-primary float-right mt-1 mr-1">
+                        <?php $createdDates = new DateTime($current_datetime);
+                            $createdDateFormats = date_format($createdDates, 'F d, Y - g:i a');
+                            echo $createdDateFormats;?>
+                        </span>
+                    </small>
+                </strong>
+            </div>
+            <div class="card-body">
+            <div class="table-responsive table-responsive-data1">
+                <table class="table table-borderless table-data3" id="taskToday">
+                <thead class="bg-primary">
                         <tr>
                             <th>Assigned to</th>
                             <th>Tasks ID</th>
@@ -35,11 +43,11 @@
                         <tr>
                             <td>
                             <?php if(empty($task['assigned_id'])){ ?>
-                                <a href="javascript:;">
+                                <a class="text-black-50 hvr-underline"  href="javascript:;">
                                     unassiged
                                 </a>
                             <?php }else{ ?>
-                                <a href="<?php echo base_url(); ?>user/<?php echo $task['assigned_id']; ?>">
+                                <a class="text-black-50 hvr-underline"  href="<?php echo base_url(); ?>user/<?php echo $task['assigned_id']; ?>">
                                     <?php $user = $this->users_model->get_user($task['assigned_id']); echo $user['first_name']; ?>
                                 </a>
                             <?php } ?>
@@ -56,14 +64,23 @@
                             ?>
 
                             </td>
-                            <td><?php echo $task_status[$task['status']];?></td>
+                            <td>
+                            <span class="badge badge-<?php echo 'status'.$task['status']; ?>">
+                                <?php echo $task_status[$task['status']];?>
+                                </span>
+                            </td>
                         </tr>
                         <?php endforeach;?>
                     </tbody>
                 </table>
             </div>
+            </div>
         </div>
     </div>
 
-</div>
-<!-- /.container-fluid -->
+
+    </div>
+    </div>
+    </div>
+
+

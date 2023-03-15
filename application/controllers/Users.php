@@ -15,9 +15,17 @@ class Users extends CI_Controller {
 
     } 
 
+    public function session_users(){
+        if(!isset($this->session->userdata['logged_in']) && !isset($_SESSION["logged_in"])){ 
+            redirect('/logout');
+        }
+    }
+    
+
     public function index(){
         $data = $this->user_info;
-        
+        $this->session_users();
+
         $data['title'] = "Users"; 
         $data['users'] = $this->users_model->get_users();  
         
@@ -30,6 +38,9 @@ class Users extends CI_Controller {
 
     public function view($id =  NULL){
         $data = $this->user_info;
+        $this->session_users();
+        $data['object'] = $this->load->helper("datetime_helper");
+
         $data['user'] = $this->users_model->get_user($id);
         if(empty($data['user'])){
             show_404();
@@ -45,9 +56,11 @@ class Users extends CI_Controller {
 
     public function create(){
         $data = $this->user_info;
+        $role = $data['user_info']['role'];
+        if($role == 2){ redirect('/');}
+        $this->session_users();
+    
         $data['positions'] = $this->positions_model->get_positions();
-
-
           
         $this->form_validation->set_rules('first_name','First Name','required|is_unique[users.first_name]');
         $this->form_validation->set_rules('last_name','Last Name','required');
@@ -57,14 +70,12 @@ class Users extends CI_Controller {
                 
         
         if($this->form_validation->run() === FALSE){
-            
             $data['input_val'] = $this->users_model->input_value();
-            
-        $this->load->view('templates/head', $data);
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/header',$data);
-        $this->load->view('users/create', $data);
-        $this->load->view('templates/footer');
+            $this->load->view('templates/head', $data);
+            $this->load->view('templates/sidebar');
+            $this->load->view('templates/header',$data);
+            $this->load->view('users/create', $data);
+            $this->load->view('templates/footer');
         }else{
             $this->users_model->create_user();
             $this->session->set_flashdata('msg_created', 'Created user successfuly!');
@@ -73,6 +84,11 @@ class Users extends CI_Controller {
     }
 
     public function update($id =  NULL){
+        $data = $this->user_info;
+        $role = $data['user_info']['role'];
+        if($role == 2){redirect('/');}
+        $this->session_users();
+
         $data['positions'] = $this->positions_model->get_positions();
         $data['user'] = $this->users_model->update_user($id);
         
@@ -96,6 +112,11 @@ class Users extends CI_Controller {
         }
     }
     public function delete($id =  NULL){
+        $data = $this->user_info;
+        $role = $data['user_info']['role'];
+        if($role == 2){redirect('/');}
+        $this->session_users();
+
         $data['user'] = $this->users_model->get_user($id);
         if(empty($data['user'])){
 
