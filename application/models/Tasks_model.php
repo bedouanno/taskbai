@@ -47,6 +47,16 @@ class Tasks_model extends CI_Model {
         return $query->row_array();
     }
 
+    public function get_unassigned_tasks(){
+        $query = $this->db->get_where('tasks', array('assigned_id' => 0));
+        return $query->result_array();
+    }
+
+    public function tasks_unassigned_count() {
+        return $this->db->where('assigned_id',0)->from("tasks")->count_all_results();
+     }
+
+
     public function get_task_assigned($id = FALSE){
         if($id === FALSE){
             $query = $this->db->get('tasks');
@@ -400,4 +410,50 @@ class Tasks_model extends CI_Model {
         return $result;
     }
 
+// ADD COMMENTS
+    public function add_comments($post_value){
+        return $this->db->insert('task_comments', $post_value);
+    }
+
+    public function get_task_comments($id){
+        $query = $this->db->get_where('task_comments', array('task_id' => $id));
+        return $query->row_array();
+    }
+
+    public function get_task_comments_child($id){
+        $query = $this->db->get_where('task_comments_child', array('comment_parent_id' => $id));
+        return $query->result_array();
+    }
+
+
+    public function add_comments_child($post_value){
+        return $this->db->insert('task_comments_child', $post_value);
+    }
+
+    public function update_comment_qa($id = NULL, $comment_update = NULL) {
+        $ps = $comment_update;
+        $this->db->set('comment_text', $ps);
+        $this->db->where('task_comments.id', $id);
+        $this->db->update('task_comments');
+        $result =  $this->db->affected_rows(); 
+        return $result;
+     }
+
+
+    //  public function get_task_qa($id = 237){
+    //     if($id === FALSE){
+    //         $query = $this->db->get('task_comments');
+    //         return $query->result_array();
+    //     }
+
+    //     $this->db->select('*');
+    //     $this->db->from('task_comments');
+    //     $this->db->where('task_id', $id);
+    //     $this->db->join('tasks', 'tasks.id = task_comments.task_id');
+    //     $query = $this->db->get();
+
+
+    //     return $query->result_array();
+
+    //  }
 }

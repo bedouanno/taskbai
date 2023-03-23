@@ -64,3 +64,4 @@ public function logout($page = 'logout') {
 }
 
 }
+?>

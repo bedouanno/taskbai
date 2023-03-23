@@ -12,8 +12,15 @@
                             Navigation Sidebar
                             </strong>
                         </div>
-                        <div class="card-body">
-
+                        <div class="navbar-sidebar pt-0 pl-3">
+                            <ul class="list-unstyled navbar__list">
+                                <?php  if( $user_info['id'] == $task['assigned_id'] or $user_info['role'] == 1):?>
+                                <li><a href="<?php echo base_url(); ?>task/<?php echo $task['id'];?>/comment"><i class="fas fa-tachometer-alt mr-2"></i> Comments QA</a></li>
+                                <?php endif; ?>
+                                <li>
+                                    <a href="<?php echo base_url(); ?>tasks"><i class="fas fa-tasks mr-2"></i> Today's Task</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -80,7 +87,7 @@
                                             <div class="col-sm-10">
                                             <?php if(!empty($assigned_name['first_name']) or $task['assigned_id'] == $user_info['id'] or $user_info['role'] == 1): ?>
                                             <!-- 'task_status' => array("Pending","Break","Inprogress","For QA", "Completed"), -->
-                                            <select class="form-select form-control-sm form-control" required name="status">
+                                            <select <?php  if($user_info['id'] != $task['assigned_id'] and $user_info['role'] != 1): echo 'disabled'; endif;?> class="form-select form-control-sm form-control" required name="status">
                                             <?php  if($task['status'] == 0): ?>
                                                 <option <?php if(!($task['status'] == 0)): echo "selected disabled"; endif; ?> value="0">Pending</option>
                                             <?php endif; ?>
@@ -218,9 +225,9 @@
                        <div id="accordion" class="counternumber">
 
                         <?php foreach($list_instructions as $list_inst): ?>
-                        <div class="card mb-0 pe-auto" data-toggle="collapse" data-target="#collapseOne<?php echo $list_inst['id']; ?>" aria-expanded="true" aria-controls="collapseOne<?php echo $list_inst['id']; ?>">
+                        <div class="card mb-0 pe-auto">
                             <div class="card-header bg-primary" id="headingOne<?php echo $list_inst['id']; ?>">
-                            <h5 class="mb-0">
+                            <h5 class="mb-0"  data-toggle="collapse" data-target="#collapseOne<?php echo $list_inst['id']; ?>" aria-expanded="true" aria-controls="collapseOne<?php echo $list_inst['id']; ?>">
                                 <button class="btn">
                                 <span class="text-white font-weight-bold">Instruction </span>
                                 </button>
@@ -247,8 +254,10 @@
                 <div class="card-header">
                     <strong class="card-title">Task and URL
                     <small>
+                    <?php  if( $user_info['id'] == $task['assigned_id'] or $user_info['role'] == 1):?>
                         <a href="javascript:;" id="TaskURLbtn" class="h6 text-primary float-right">
                         <i class="fa fa-pencil-square-o"></i></a>
+                        <?php endif; ?>
                     </small>
                     </strong>
                 </div>
@@ -336,6 +345,21 @@
                                 
                             </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong class="card-title">QA Comments
+                            </strong>
+                        </div>
+                        <div class="card-body">
+                            <?php  if( $user_info['id'] == $task['assigned_id'] or $user_info['role'] == 1):?>
+                
+                            <a class="btn btn-sm btn-danger" href="<?php echo base_url(); ?>task/<?php echo $task['id'];?>/comment">Comment</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

@@ -28,6 +28,12 @@ class Tasks extends CI_Controller {
         $data = $this->user_info;
         $this->session_users();
 
+        // $val = $this->tasks_model->get_task_qa();
+
+        // print_r($val);
+
+        // exit;
+
         if(!isset($this->session->userdata['logged_in']) && !isset($_SESSION["logged_in"])){ 
             redirect('/logout');
         }
@@ -75,6 +81,28 @@ class Tasks extends CI_Controller {
         $this->load->view('templates/header',$data);
         $this->load->view('tasks/task_history', $data);
         $this->load->view('templates/footer');
+}
+
+public function unassigned(){
+    $data = $this->user_info;
+    $this->session_users();
+  
+    if($data['user_info']['role'] == 2){
+        $querys = $data['user_info']['id'];
+        $data['tasks'] = $this->tasks_model->get_tasks($querys);
+
+    }else{
+        $data['tasks'] = $this->tasks_model->get_unassigned_tasks();
+    }
+
+    $data['title'] = "Unassigned Tasks"; 
+    $data['user'] = $this->users_model->get_user();
+    
+    $this->load->view('templates/head', $data);
+    $this->load->view('templates/sidebar');
+    $this->load->view('templates/header',$data);
+    $this->load->view('tasks/unassigned', $data);
+    $this->load->view('templates/footer');
 }
     
     public function view($id =  NULL){
@@ -596,6 +624,102 @@ class Tasks extends CI_Controller {
                 redirect('task/errors');
             }
 
+
+
+        }
+
+// COMMENTS SECTION
+        public function comment_index($id = NULL){
+            $data = $this->user_info;
+            $this->session_users();
+            $user_id = $data['user_info']['id'];
+            $data['get_task'] = $this->tasks_model->get_task($id);
+
+            $error = $this->form_validation->set_rules('qa_comment','QA Comment');
+            $error = $this->form_validation->set_rules('qa_comment_child','QA Comment Sub');
+            $error = $this->form_validation->set_rules('text_comment_update');
+
+
+            $data['qa_comments'] = $this->tasks_model->get_task_comments($id);
+
+            if($data['qa_comments'] != NULL):
+
+            $id_comment_parent = $data['qa_comments']['id'];
+
+            // exit;
+            $data['get_reply'] = $this->tasks_model->get_task_comments_child($id_comment_parent);
+            endif;
+
+            if($this->input->post('qa_comment')):
+                $this->form_validation->set_rules('comment_text','Comment Text','required');
+                $post_data = array(
+                    'task_id' => $id,
+                    'comment_qa_id' => $user_id,
+                    'comment_text' => $this->input->post('comment_text')
+                );
+                if($this->form_validation->run() === TRUE){
+                    
+                    $this->tasks_model->add_comments($post_data);
+                    $this->session->set_flashdata('msg_created', 'Added comment successfully!');
+                    redirect('task/'.$id.'/comment');
+                }
+
+            endif; 
+
+
+            if($this->input->post('qa_comment_child')):
+                $comment_parent_id = $data['qa_comments']['id'];
+
+                $this->form_validation->set_rules('comment_text_child','Comment Text Child','required');
+
+
+                $post_data = array(
+                    'comment_parent_id' => $comment_parent_id,
+                    'comment_text_child' => $this->input->post('comment_text_child'),
+                    'comment_user_id' =>  $user_id
+                );
+
+        
+                if($this->form_validation->run() === TRUE){
+                    
+                    $this->tasks_model->add_comments_child($post_data);
+                    $this->session->set_flashdata('msg_created', 'Added replied successfully!');
+                    redirect('task/'.$id.'/comment');
+                }
+
+            endif; 
+
+
+            if($this->input->post('comment_update')):
+                $comment_parent_id = $data['qa_comments']['id'];
+                $this->form_validation->set_rules('text_comment_update','Comment Text','required');
+
+                $post_data = $this->input->post('text_comment_update');
+    
+                if($this->form_validation->run() === TRUE){
+   
+                    $this->tasks_model->update_comment_qa($id_comment_parent, $post_data);
+                    $this->session->set_flashdata('msg_created', 'Updated comment successfully!');
+                    redirect('task/'.$id.'/comment');
+                }
+
+            endif; 
+
+            if($this->form_validation->run() === FALSE){
+                $this->load->view('templates/head', $data);
+                $this->load->view('templates/sidebar');
+                $this->load->view('templates/header',$data);
+                $this->load->view('tasks/comments/index', $data);
+                $this->load->view('templates/footer');
+            }else{
+
+        
+                
+
+                redirect('task/'.$id.'/comment');
+           
+                
+            }
 
 
         }

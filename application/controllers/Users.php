@@ -28,6 +28,11 @@ class Users extends CI_Controller {
 
         $data['title'] = "Users"; 
         $data['users'] = $this->users_model->get_users();  
+
+  
+        $json = json_encode($this->users_model->get_users());
+        
+ 
         
         $this->load->view('templates/head', $data);
         $this->load->view('templates/sidebar');

@@ -102,6 +102,9 @@
     CKEDITOR.replace( 'formOaccess' );
     CKEDITOR.replace( 'subject_desc' );
     CKEDITOR.replace( 'activity_desc' );
+    CKEDITOR.replace( 'comment_text' );
+    CKEDITOR.replace( 'text_comment_update' );
+    
 
 </script>
 
@@ -109,6 +112,17 @@
 
 
 $(document).ready(function(){
+
+    $('#updateCommentbtn').click (function(){
+    $('#updateComment').show();
+});
+
+
+
+$('.closebtn_comment').click (function(){
+    $('#updateComment').hide();
+});
+
 
 $('#btnCreateInstruction').click (function(){
     $('#CreateInstructions').show();

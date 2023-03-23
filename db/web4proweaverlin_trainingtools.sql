@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2023 at 04:19 AM
+-- Generation Time: Mar 23, 2023 at 02:13 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -319,10 +319,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `task_name`, `account_id`, `created_date`, `assigned_date`, `assigned_datetime`, `updated_date`, `instructions_id`, `assigned_id`, `created_id`, `qa_id`, `attachment_file`, `status`, `task_url`, `task_backup`, `next_steps`, `additional_notes`, `progress_status`) VALUES
-(231, 'Activity 1 - Layout Conversion  03 07 23 (Other)', 42, '2023-03-06 21:22:17', '2023-03-07', '2023-03-07 13:22:17', '0000-00-00 00:00:00', 0, 24, 1, 0, 'layout-7-file.zip', 3, '<p>Converted Website -</p>\r\n\r\n<p><a href=\"https://drive.google.com/drive/folders/1Nr7u0BViVxk-4mHS6_mPCbXoAur2YjWg?usp=sharing\" target=\"_blank\">https://drive.google.com/drive/folders/1Nr7u0BViVxk-4mHS6_mPCbXoAur2YjWg?usp=sharing</a></p>\r\n', NULL, '<p>-</p>\r\n', '<p>-</p>\r\n', 0),
-(232, 'Activity 1 - Layout Conversion  03 07 23 (Other)', 42, '2023-03-06 21:22:35', '2023-03-07', '2023-03-07 13:22:35', '0000-00-00 00:00:00', 0, 25, 1, 0, 'layout-4-file.zip', 3, '<p><a href=\"https://drive.google.com/drive/folders/19VzaKp78NJiia6rjA3K1DMeSHocwBFa4?usp=sharing\" target=\"_blank\"><span style=\"color:#ffffff\"><span style=\"background-color:#2ecc71\">https://drive.google.com/drive/folders/19VzaKp78NJiia6rjA3K1DMeSHocwBFa4?usp=sharing</span></span></a></p>\r\n', '', '', '', 0),
+(231, 'Activity 1 - Layout Conversion  03 07 23 (Other)', 42, '2023-03-06 21:22:17', '2023-03-22', '2023-03-22 19:33:49', '0000-00-00 00:00:00', 0, 4, 1, 0, 'layout-7-file.zip', 0, '<p>Converted Website -</p>\r\n\r\n<p><a href=\"https://drive.google.com/drive/folders/1Nr7u0BViVxk-4mHS6_mPCbXoAur2YjWg?usp=sharing\" target=\"_blank\">https://drive.google.com/drive/folders/1Nr7u0BViVxk-4mHS6_mPCbXoAur2YjWg?usp=sharing</a></p>\r\n', NULL, '<p>-</p>\r\n', '<p>-</p>\r\n', 0),
+(232, 'Activity 1 - Layout Conversion  03 07 23 (Other)', 42, '2023-03-06 21:22:35', '2023-03-22', '2023-03-22 19:33:49', '0000-00-00 00:00:00', 0, 10, 1, 0, 'layout-4-file.zip', 0, '<p><a href=\"https://drive.google.com/drive/folders/19VzaKp78NJiia6rjA3K1DMeSHocwBFa4?usp=sharing\" target=\"_blank\"><span style=\"color:#ffffff\"><span style=\"background-color:#2ecc71\">https://drive.google.com/drive/folders/19VzaKp78NJiia6rjA3K1DMeSHocwBFa4?usp=sharing</span></span></a></p>\r\n', '', '', '', 0),
 (234, 'Activity 1 - Layout Conversion 03 07 23 (Other) ', 42, '2023-03-07 17:04:04', '2023-03-08', '2023-03-08 09:16:14', '0000-00-00 00:00:00', 0, 24, 1, 0, NULL, 2, NULL, NULL, NULL, NULL, 1),
-(235, 'Activity 1 - Layout Conversion 03 07 23 (Other) ', 42, '2023-03-07 17:04:29', '2023-03-08', '2023-03-08 09:17:12', '0000-00-00 00:00:00', 0, 25, 1, 0, NULL, 2, '<p>test</p>\r\n', '<p>testttt</p>\r\n', '<p>test1</p>\r\n', '<p>testrrrr</p>\r\n', 1),
+(235, 'Activity 1 - Layout Conversion 03 07 23 (Other) ', 42, '2023-03-07 17:04:29', '2023-03-22', '2023-03-22 19:33:50', '0000-00-00 00:00:00', 0, 20, 1, 0, NULL, 0, '<p>test</p>\r\n', '<p>testttt</p>\r\n', '<p>test1</p>\r\n', '<p>testrrrr</p>\r\n', 0),
 (237, 'Able Autism Therapy Services 03 13 23 (Sample)', 21, '2023-03-13 18:20:26', '2023-03-13', '2023-03-13 18:20:26', '0000-00-00 00:00:00', 0, 22, 1, 0, NULL, 0, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
@@ -383,6 +383,43 @@ INSERT INTO `tasks_errors` (`id`, `error_name`, `error_category`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `task_comments`
+--
+
+CREATE TABLE `task_comments` (
+  `id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `comment_qa_id` int(11) NOT NULL,
+  `comment_text` text NOT NULL,
+  `comment_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `task_comments`
+--
+
+INSERT INTO `task_comments` (`id`, `task_id`, `comment_qa_id`, `comment_text`, `comment_date`) VALUES
+(6, 237, 1, '<p>test</p>\r\n erer', '2023-03-17 10:36:10'),
+(7, 234, 1, '<p>testss</p>\r\n', '2023-03-22 19:50:55'),
+(8, 232, 1, '<p>testest</p>\r\n', '2023-03-22 19:51:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_comments_child`
+--
+
+CREATE TABLE `task_comments_child` (
+  `id` int(11) NOT NULL,
+  `comment_parent_id` int(11) NOT NULL,
+  `comment_text_child` text NOT NULL,
+  `comment_user_id` int(11) NOT NULL,
+  `comment_child_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `task_qa`
 --
 
@@ -397,8 +434,7 @@ CREATE TABLE `task_qa` (
 --
 
 INSERT INTO `task_qa` (`id`, `qas_id`, `task_id`) VALUES
-(14, 2, 237),
-(15, 31, 237);
+(22, 27, 237);
 
 -- --------------------------------------------------------
 
@@ -418,7 +454,8 @@ CREATE TABLE `time_progress_end` (
 
 INSERT INTO `time_progress_end` (`id`, `time_end`, `task_id`) VALUES
 (364, '17:45:00', 231),
-(365, '17:58:00', 232);
+(365, '17:58:00', 232),
+(366, '19:32:00', 235);
 
 -- --------------------------------------------------------
 
@@ -540,6 +577,18 @@ ALTER TABLE `tasks_errors`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `task_comments`
+--
+ALTER TABLE `task_comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `task_comments_child`
+--
+ALTER TABLE `task_comments_child`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `task_qa`
 --
 ALTER TABLE `task_qa`
@@ -596,7 +645,7 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT for table `instruction_list`
 --
 ALTER TABLE `instruction_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=284;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
 
 --
 -- AUTO_INCREMENT for table `positions`
@@ -617,16 +666,28 @@ ALTER TABLE `tasks_errors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
+-- AUTO_INCREMENT for table `task_comments`
+--
+ALTER TABLE `task_comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `task_comments_child`
+--
+ALTER TABLE `task_comments_child`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `task_qa`
 --
 ALTER TABLE `task_qa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `time_progress_end`
 --
 ALTER TABLE `time_progress_end`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=367;
 
 --
 -- AUTO_INCREMENT for table `time_progress_start`

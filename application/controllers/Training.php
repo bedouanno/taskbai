@@ -7,7 +7,7 @@ class Training extends CI_Controller {
         parent::__construct(); // needed when adding a constructor to a controller
         new DateTime();
 
-      
+     
         $this->user_info = array(
             'sitename' => 'TaskBai 1.0',
             'robots' => 'noindex,nofollow',

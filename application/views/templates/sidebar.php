@@ -42,6 +42,15 @@
                                 </li>
                             </ul>
                         </li>
+                        <?php if($user_info['role'] == 1 and $this->tasks_model->tasks_unassigned_count() != 0): ?>  
+                        <li>
+                            <a href="<?php echo base_url(); ?>tasks/unassigned" class="text-danger">
+                                <i class="fas fa-briefcase text-danger"></i>Unassigned Tasks<small class="float-right mt-1">
+                                <span class="badge badge-danger mr-2"><?php echo $this->tasks_model->tasks_unassigned_count(); ?></span> 
+                                </small></a>
+ 
+                        </li>
+                        <?php endif; ?>
                         <hr>
                         <li class="nav-item">
                             <a class="nav-link" target="_blank" href="https://www.xara.com/us/designer-pro/tutorials-demos/#video_player">

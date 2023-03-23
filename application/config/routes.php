@@ -25,12 +25,16 @@ $route['task/instruction/delete/(:any)'] = 'tasks/delete_task_instruction/$1';
 $route['task/create/(:any)'] = 'tasks/create/$1';
 $route['task/(:any)'] = 'tasks/view/$1';
 $route['tasks/history'] = 'tasks/task_history';
+$route['tasks/unassigned'] = 'tasks/unassigned';
 $route['tasks'] = 'tasks/index';
 
 // ATTENDANCE ROUTES
 $route['attendance/user/(:any)'] = 'attendance/attendance_user/$1';
 $route['attendance/user-list'] = 'attendance/attendance_list';
 $route['attendance'] = 'attendance/index';
+
+// COMMENTS ROUTES
+$route['task/(:any)/comment'] = 'tasks/comment_index/$1';
 
 // TRAINING GUIDELINES ROUTES
 $route['training-activity/edit/topic/(:any)'] = 'training/update_topic/$1';

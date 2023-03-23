@@ -59,6 +59,9 @@
 #TaskURL{display: none; position: fixed; z-index: 3; padding: 50px 15px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: #000; background-color: rgba(0,0,0,.4);	}
 #TaskURL .modal-dialog{position: relative;background-color: #fefefe;margin: auto;    margin-bottom: auto;margin-bottom: 50px;width: 100%;max-width: 930px;border: 3px solid #cb0a05;padding: 15px 0 0;-webkit-animation-name: animatetop;-webkit-animation-duration: .4s;animation-name: animatetop;animation-duration: .4s;}
 
+#updateComment{display: none; position: fixed; z-index: 3; padding: 50px 15px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: #000; background-color: rgba(0,0,0,.4);	}
+#updateComment .modal-dialog{position: relative;background-color: #fefefe;margin: auto;    margin-bottom: auto;margin-bottom: 50px;width: 100%;max-width: 930px;border: 3px solid #cb0a05;padding: 15px 0 0;-webkit-animation-name: animatetop;-webkit-animation-duration: .4s;animation-name: animatetop;animation-duration: .4s;}
+
 #btnEditModal{display: none; position: fixed; z-index: 3; padding: 50px 15px; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: #000; background-color: rgba(0,0,0,.4);	}
 #btnEditModal .modal-dialog{position: relative;background-color: #fefefe;margin: auto; margin-bottom: auto;margin-bottom: 50px;width: 100%;max-width: 930px;-webkit-animation-name: animatetop;-webkit-animation-duration: .4s;animation-name: animatetop;animation-duration: .4s; border-radius: 15px; overflow: hidden}
 .pe-auto{cursor: pointer !important; -webkit-transition: all .3s linear; transition: all .3s linear;}
