@@ -75,6 +75,10 @@
     background: red !important;
 }
 
+#position_modal{display: none; position: fixed; width: 100%; height: 100%; left: 50%; top: 50%; z-index: 900; width: 300px; height: 200px; transform: translate(-50%, -50%)}
+#position_modal .card{}
+#position_modal .card-body{padding: 15px}
+
 </style>
 
 </head>

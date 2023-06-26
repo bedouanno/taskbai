@@ -48,7 +48,8 @@
                                 </a>
                             <?php }else{ ?>
                                 <a class="text-black-50 hvr-underline"  href="<?php echo base_url(); ?>user/<?php echo $task['assigned_id']; ?>">
-                                    <?php $user = $this->users_model->get_user($task['assigned_id']); echo $user['first_name']; ?>
+                                    <?php $user = $this->users_model->get_user($task['assigned_id']); echo $user['first_name']; ?> 
+                                    <span class="badge badge-sm text-warning"><?php echo $user['position']; ?></span>
                                 </a>
                             <?php } ?>
                             </td>

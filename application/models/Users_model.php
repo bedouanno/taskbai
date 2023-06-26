@@ -84,4 +84,9 @@ class Users_model extends CI_Model {
     public function user_count() {
        return $this->db->count_all("users");
     }
+
+
+    public function create_position($data_post){
+        return $this->db->insert('positions',$data_post);
+    }
 }

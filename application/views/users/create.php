@@ -32,12 +32,12 @@
     </div>
     <div class="row">
     <div class="form-group col-sm-6">
-      <label for="exampleSelect1" class="form-label mt-4">Position</label>
-      <select class="form-select form-control-sm form-control" id="exampleSelect1" required name="position" >
+      <label for="exampleSelect1" class="form-label mt-4 d-block">Position <a id="position_btn" class="float-right text-success" href="javascript:;">Add Position <i class="fas fa-plus fa-fw"></i></a></label> 
+      <select class="form-select form-control-sm form-control" id="selectposition" required name="position" >
             <option value="">Select position</option>
-            <?php foreach ($positions as $position): ?>
-            <option value="<?php echo $position['position_name']; ?>"><?php echo $position['position_name']; ?></option>
-            <?php endforeach; ?>
+            <!-- <-?php foreach ($positions as $position): ?>
+            <option value="<-?php echo $position['position_name']; ?>"><-?php echo $position['position_name']; ?></option>
+            <-?php endforeach; ?> -->
       </select>
     </div>
     </div>
@@ -72,16 +72,16 @@
 <!-- /.container-fluid -->
 <!-- /.container-fluid -->
 
-<!--
-<script>
-$(document).ready(function(){
-    $('#EmailAddress').change(function() {
-        var parts = $(this).val().split('@');
-        var user = parts[0];
-        var username = user.replace(/[^a-z\d]+/ig, '');
-        $('#Username').val(username);
-    });
-    
-});
-</script>
--->
+<div id="position_modal">
+<div class="card">
+  <div class="card-header">Add Position <a href="javascript:;" class="posmod_btn float-right text-danger">Close</a></div>
+  <div class="card-body">
+    <form action="javascript:;">
+      <input type="text" name="positions" id="positions_id" class="form-control">
+      <input type="submit" name="submit_btn" id="submit_btn_id" class="form-control btn-success mt-2" value="ADD">
+    </form>
+  </div>
+</div>
+</div>
+
+

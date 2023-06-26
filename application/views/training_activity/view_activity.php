@@ -4,12 +4,12 @@
 <div class="row">
 <?php if($user_info['role'] == 1): ?>
     <div class="col-sm-12">
-        <a class="btn btn-sm btn-primary float-right" href="<?php echo base_url().'training-activity/create/topic/'.$day_activity['id']; ?>">Create Topic</a>
+        <a class="btn btn-sm btn-primary float-right" href="<?php echo base_url().'training-activity/create/subject/'.$day_activity['id']; ?>">Create Subject</a>
     </div>
 <?php endif; ?>
 </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 h-100">
             <div class="card">
                 <div class="card-header">
                     <strong class="card-title"><?php echo $day_activity['activity_title']; ?>
@@ -26,16 +26,16 @@
                 <hr>
                 <?php 
                     $act_id = $day_activity['id'];
-                    $topics = $this->activity_model->get_activity_topics($act_id); 
+                    $subjects = $this->activity_model->get_activity_subjects($act_id); 
                 ?>  
-                    <?php if(!empty($topics)){ ?>
+                    <?php if(!empty($subjects)){ ?>
                     <ul class="list-group list-unstyled">
-                        <?php foreach($topics as $topic): ?>
-                        <li><a class="d-block list-group-item text-black-50 hvr-underline" href="<?php echo base_url().'training-activity/topic/'.$topic['subject_slug']; ?>"><?php echo $topic['subject_title']; ?></a></li>
+                        <?php foreach($subjects as $subject): ?>
+                        <li><a class="d-block list-group-item text-black-50 hvr-underline" href="<?php echo base_url().'training-activity/subject/'.$subject['subject_slug']; ?>"><?php echo $subject['subject_title']; ?></a></li>
                         <?php endforeach; ?>
                     </ul> 
                     <?php }else{ ?> 
-                        <span class="font-italic">No topics found!</span>
+                        <span class="font-italic">No subject found!</span>
                     <?php } ?>
                 </div>
             </div>

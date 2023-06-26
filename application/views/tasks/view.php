@@ -81,6 +81,27 @@
                             <div class="mx-auto">
                                 <div class="row">
                                     <div class="col-sm-4"> 
+                                        <?php 
+                                        
+                                        // $date_now = new DateTime();
+                                        // $date2    = new DateTime($task['assigned_datetime']);
+
+
+
+                                        // $date_now1 = date_format($date_now, 'm-d-Y');
+                                        // $date3 = date_format($date2, 'm-d-Y');
+
+                                        
+
+
+                                        // // print_r($date3);
+
+
+                                        // if ($date3 <= $date_now1) {
+                                        //     echo "for QA";
+                                        // }
+                                        
+                                        ?>
                                         <span class="d-block font-weight-bold mb-1">Status:</span>
                                         <?php echo form_open('task/'.$task['id']); ?>
                                         <div class="row px-1">
@@ -326,16 +347,27 @@
                         </div>
                         <div class="card-body">
                             <div class="row px-2">
-                            <div class="col-sm-3">
-                                
-                                    <?php foreach($time_start_task as $time_start): ?>
-                                        <div class="row">
-                                        <?php echo '<span class="text-xs" style="width: auto"><i class="fa fa-clock-o mr-1 text-success"></i></span>'.date("g:i a", strtotime($time_start['time_start'])); ?>
-                                        </div> 
-                                    <?php endforeach; ?>
-                                
-                            </div>
-                            <div class="col-sm-3">
+
+                                <?php foreach($time_tracker as $time): ?>
+                                    <?php if($time['task_status'] == 1 or $time['task_status'] == 3){ 
+                                        $css_status ='text-danger';
+                                    }else{
+                                        $css_status ='text-success';
+                                    }
+                                    ?>
+
+                                    
+
+                                    <div class="col-sm-6">
+                                    <?php echo '<span class="text-xs" style="width: auto"><i class="fa fa-clock-o mr-1 '.$css_status.'"></i></span>'.date("g:i a", strtotime($time['task_time'])); ?>
+                                    </div>
+                                <?php endforeach; ?>
+
+
+                          
+ 
+                        
+                             <!-- <div class="col-sm-3">
                                 
                                     <?php foreach($time_end_task as $time_end): ?>
                                         <div class="row">
@@ -343,7 +375,7 @@
                                         </div> 
                                     <?php endforeach; ?>
                                 
-                            </div>
+                            </div> -->
                             </div>
                         </div>
                     </div>

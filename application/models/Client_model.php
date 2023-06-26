@@ -87,6 +87,18 @@ class Client_model extends CI_Model {
 
         return 1;
     }
+
+
+
+    public function get_task_bycomp_user($id = FALSE, $user_id = FALSE){
+        if($id === FALSE){
+            $query = $this->db->get('tasks');
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('tasks', array('account_id' => $id, 'assigned_id' => $user_id));
+        return $query->result_array();
+    }
     
 
 }

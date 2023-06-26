@@ -84,6 +84,7 @@ class Tasks extends CI_Controller {
 }
 
 public function unassigned(){
+    
     $data = $this->user_info;
     $this->session_users();
   
@@ -121,6 +122,9 @@ public function unassigned(){
         $data['list_instructions'] = $this->tasks_model->get_task_instruction($data['task']['id']);
 
 
+      
+
+
         // UPLOAD ATTACHMENT
 
         $this->form_validation->set_rules('attachment_file','Attachment File');
@@ -132,6 +136,21 @@ public function unassigned(){
         // print_r($data['list_instructions']);
 
         $task_id = $data['task']['id'];
+
+
+        $data['time_tracker'] = $this->tasks_model->get_task_tracker($task_id);
+
+        $time_used = $data['time_tracker'];
+
+
+
+
+        // exit;
+
+        // echo "<pre>".print_r($data['time_tracker'][0],true)."</pre>";
+        
+
+        // exit;
 
         // Create Instructions
         $this->form_validation->set_rules('instruction','Instruction','required');
@@ -248,6 +267,11 @@ public function unassigned(){
             'assigned_date' => $this->input->post('assigned_date'),
             'assigned_date' => $this->input->post('assigned_datetime')
         );
+
+
+
+        // redirect('task/'.$task_id);
+
         }else{
         $assinged_usr = array(
             'assigned_id' => $this->input->post('assigned_id'),
@@ -300,7 +324,8 @@ public function unassigned(){
             $statusPost = array(
                 'status' => $this->input->post('status')
             );
-
+            $_POST['task_id'] = $task_id;
+            $this->tasks_model->delete_task_tracker($_POST['task_id']);
 
             $this->tasks_model->update_task_status($task_id, $statusPost);
             redirect('task/'.$task_id);
@@ -364,7 +389,11 @@ public function unassigned(){
             // $this->session->set_flashdata('msg_created', 'Updated successfully!');     
              $currenttime = time();
 
+    
+
             if($post_status['status'] == 0):
+     
+
             endif;
 
             // completed status
@@ -397,28 +426,45 @@ public function unassigned(){
 
             //  BREAK STATUS
             if($post_status['status'] == 1):
-                $time_end = date("H:i:s", $currenttime);
+                // exit;
+                $time_end = date('y-m-d H:i:s');
                 $ps_progress =  0;
                 $_POST['time_end'] = $time_end;
                 $_POST['task_id'] = $task_id;
+
+                $post_data = array(
+                    'task_id' => $_POST['task_id'],
+                    'task_time' => $time_end,
+                    'task_status' => 1
+                );
+                $this->tasks_model->create_task_tracker($post_data);
              
 
-                 $data = array(
-                    'time_end' => $this->input->post('time_end'),
-                    'task_id' => $this->input->post('task_id')
-                );
+                //  $data = array(
+                //     'time_end' => $this->input->post('time_end'),
+                //     'task_id' => $this->input->post('task_id')
+                // );
 
                 $this->tasks_model->update_task_progress_status($task_id, $ps_progress);
-                $this->tasks_model->create_time_end($task_id, $data);
+
+                // $this->tasks_model->create_time_end($task_id, $data);
              endif;
                 
             //  IN PROGRESS STATUS
             if($post_status['status'] == 2):
-                $time_start = date("H:i:s", $currenttime);
+                $time_start = date('y-m-d H:i:s');
                 $ps_progress =  1;
 
                 $_POST['time_start'] = $time_start;
                 $_POST['task_id'] = $task_id;
+
+
+                $post_data = array(
+                    'task_id' => $_POST['task_id'],
+                    'task_time' => $time_start,
+                    'task_status' => 2
+                );
+                $this->tasks_model->create_task_tracker($post_data);
             
                 // GET ASSIGNED TASK 
                 $gt = $this->tasks_model->get_task_assigned($data['task']['assigned_id']);
@@ -429,27 +475,38 @@ public function unassigned(){
                 );
 
                 $this->tasks_model->update_task_progress_status($task_id, $ps_progress);
-                $this->tasks_model->create_time_start($task_id, $data);
+                // $this->tasks_model->create_time_start($task_id, $data);
             endif;
                 
             //  FOR QA STATUS
             if($post_status['status'] == 3):
-                $time_end = date("H:i a", $currenttime); 
-               
-                $_POST['time_end'] = $time_end;
+                // $time_end = date("H:i a", $currenttime); 
+                $time_end = date('y-m-d H:i:s');
+
+
                 $_POST['task_id'] = $task_id;
+
+                $post_data = array(
+                    'task_id' => $_POST['task_id'],
+                    'task_time' => $time_end,
+                    'task_status' => 3
+                );
+                $this->tasks_model->create_task_tracker($post_data);
+               
+                // $_POST['time_end'] = $time_end;
+                // $_POST['task_id'] = $task_id;
              
 
-                 $data = array(
-                    'time_end' => $this->input->post('time_end'),
-                    'task_id' => $this->input->post('task_id')
-                );
+                //  $data = array(
+                //     'time_end' => $this->input->post('time_end'),
+                //     'task_id' => $this->input->post('task_id')
+                // );
                 $ps_progress =  0;
                 $this->tasks_model->update_task_progress_status($task_id, $ps_progress);
 
   
              
-              $this->tasks_model->create_time_end($task_id, $data);
+            //   $this->tasks_model->create_time_end($task_id, $data);
             endif;
             
 

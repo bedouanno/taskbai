@@ -45,6 +45,14 @@
                             <?php }else{ ?>
                                 <a class="text-black-50 hvr-underline" href="<?php echo base_url(); ?>user/<?php echo $task['assigned_id']; ?>">
                                     <?php $user = $this->users_model->get_user($task['assigned_id']); echo $user['first_name']; ?>
+                                    <?php if($user_info['role']==1){ ?>
+
+                                        <?php if($user['role']==2){ ?>
+                                        <span class="badge badge-sm text-primary"><?php echo $user['position']; ?></span>
+                                        <?php }else{ ?>
+                                            <span class="badge badge-sm"><?php echo $user['position']; ?></span>
+                                        <?php } ?>
+                                    <?php } ?>
                                 </a>
                             <?php } ?>
                             </td>

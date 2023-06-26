@@ -104,6 +104,7 @@
     CKEDITOR.replace( 'activity_desc' );
     CKEDITOR.replace( 'comment_text' );
     CKEDITOR.replace( 'text_comment_update' );
+    CKEDITOR.replace( 'topic_desc' );
     
 
 </script>
@@ -168,12 +169,168 @@ icon: $.sweetModal.ICON_SUCCESS});
 </script>
 <?php endif; ?>
 
+<script>
 
+$('#parent_topic .child_topic').addClass( "d-none" );
+
+
+function open_topic(event) {
+
+
+let vidd = `${event}myVideo`
+// $(vidd).not(this).pause();
+$(vidd).trigger('play');
+
+// let vid = $(vidd); 
+
+
+
+// console.log(vidd);
+// console.log(event);
+
+// $(`'${event} .myVideo'`).pause();
+
+$('#parent_topic').removeClass('d-none')
+$('#default_topic').addClass('d-none')
+$('#parent_topic .child_topic').addClass( "d-none" );
+
+if(vidd != null){
+
+$(vidd).not(this).trigger('pause');
+$('.myVideo').trigger('pause');
+
+// vidd.pause(); 
+
+
+}
+
+
+// $('video').trigger('play');
+// $('video').trigger('pause');
+
+// $('#parent_topic .child_topic:first-child').not(this).removeClass('d-none');
+
+$(event).not(this).removeClass('d-none');
+
+
+}
+</script>
 
 
 <script>
 $( ".accordion-custom" ).click(function() {
 $( ".panel" ).show();
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#position_btn').click(function() {
+      $('#position_modal').show();
+
+    });
+
+    $('.posmod_btn').click(function() {
+      $('#position_modal').hide();
+
+
+       });
+
+      $('#submit_btn_id').click(function() {
+            event.stopImmediatePropagation();
+
+
+        if( !$('input#positions_id').val() ) {
+            $.sweetModal({
+                content: 'Empty Field!',
+                icon: $.sweetModal.ICON_WARNING
+            });
+        }else{
+        var formData = {
+            position_name: $('input#positions_id').val()
+        }
+            // alert(formData.positions);
+
+
+        $.ajax({
+            url: '<?php echo base_url(); ?>users/position', // The URL to your controller's method
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function(response) {
+
+            console.log(response.status);
+
+                // Handle the response from the server
+                if (response.status == 'success') {
+                   $.sweetModal({
+                        content: `Created ${formData.position_name} successfully!`,
+                        icon: $.sweetModal.ICON_SUCCESS
+                        
+                    });
+            // $('#exampleSelect1').load(window.location.href+' #exampleSelect1');
+            // alert(window.location.href+' #list_se');
+                        // $('#form_update').hide();
+                    $('#position_modal').hide();
+
+                        // $('#form_update').removeClass('d-inline-block');
+                } else {
+              
+                    $.sweetModal({
+                    content: response.message,
+                    icon: $.sweetModal.ICON_WARNING
+                });
+
+
+
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle any errors that occur during the request
+                console.log(status);
+                    $.sweetModal({
+                    content: `Subject ${formData.position_name} is already exist!`,
+                    icon: $.sweetModal.ICON_WARNING
+                });
+            }
+        // error: function(xhr, status, error) {
+        //     console.error(xhr.responseText);
+        // }
+        });
+
+        }
+
+      });
+
+
+  $('select#selectposition').focus(function() {
+        $.ajax({
+        url: "<?php echo base_url(); ?>users/get_ajax_position", // URL to the controller method
+        type: "GET",
+        dataType: "json",
+        success: function(response) {
+
+            var listHtml = '';
+
+                // var listHtml = '<ul>';
+                for (var i = 0; i < response.length; i++) {
+                    let item = response[i];
+
+
+                    listHtml += '<option value="'+item.id+'">'+item.position_name+'</option>';
+                }
+                listHtml += '';
+
+        // Append the generated list HTML to a container element
+        $('select#selectposition').html(listHtml);
+        },
+        error: function(xhr, status, error) {
+            // console.error(xhr.responseText);
+        }
+        });
+ 
+   });
+    
 });
 </script>
 

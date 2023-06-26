@@ -21,13 +21,13 @@ class Activity_model extends CI_Model {
     }
 
 
-    // Create topic
-    public function create_topic($postValue = FALSE){ 
+    // Create Subject
+    public function create_subject($postValue = FALSE){ 
         $data = $postValue;
         return $this->db->insert('activity_subject', $data);
     }
 
-    public function get_topic($id = FALSE){
+    public function get_subject($id = FALSE){
         if($id === FALSE){
             $query = $this->db->get('activity_subject');
             return $query->result_array();
@@ -36,7 +36,7 @@ class Activity_model extends CI_Model {
         return $query->row_array();
     }
 
-    public function get_activity_topics($id = FALSE){
+    public function get_activity_subjects($id = FALSE){
         if($id === FALSE){
             $query = $this->db->get('activity_subject');
             return $query->result_array();
@@ -45,7 +45,7 @@ class Activity_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_topics_slug($slug = FALSE){
+    public function get_subjects_slug($slug = FALSE){
         if($slug === FALSE){
             $query = $this->db->get('activity_subject');
             return $query->result_array();
@@ -65,11 +65,69 @@ class Activity_model extends CI_Model {
     }
 
     
-    public function update_topic($id = FALSE, $postValue = FALSE){
+    public function update_subject($id = FALSE, $postValue = FALSE){
         $data = $postValue;
         $this->db->set($data);
         $this->db->where('activity_subject.id', $id);
         $this->db->update('activity_subject');
+        $result = $this->db->affected_rows(); 
+        return $result;
+    }
+
+
+    // FOR TOPIC
+    public function get_subject_topic($id = FALSE){
+        if($id === FALSE){
+            $query = $this->db->get('activity_subject');
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('activity_subject', array('id' => $id));
+        return $query->row_array();
+    }
+
+    public function get_topic_subject($id = FALSE){
+        if($id === FALSE){
+            $query = $this->db->get('activity_topics');
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('activity_topics', array('topic_subject' => $id));
+        return $query->result_array();
+    }
+
+    public function get_topic_subject_slugs($id = FALSE){
+        if($id === FALSE){
+            $query = $this->db->get('activity_topics');
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('activity_topics', array('id' => $id));
+        return $query->row_array();
+    }
+
+    public function get_topic($id = FALSE){
+        if($id === FALSE){
+            $query = $this->db->get('activity_topics');
+            return $query->result_array();
+        }
+
+        $query = $this->db->get_where('activity_topics', array('id' => $id));
+        return $query->row_array();
+    }
+
+
+
+    public function create_topic($postValue = FALSE){ 
+        $data = $postValue;
+        return $this->db->insert('activity_topics', $data);
+    }
+
+    public function update_topic($id = FALSE, $postValue = FALSE){
+        $data = $postValue;
+        $this->db->set($data);
+        $this->db->where('activity_topics.id', $id);
+        $this->db->update('activity_topics');
         $result = $this->db->affected_rows(); 
         return $result;
     }

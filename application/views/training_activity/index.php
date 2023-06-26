@@ -21,16 +21,16 @@
                             <span class="d-block mb-2"><?php echo $activity['activity_desc']; ?></span>
                             <?php 
                                 $act_id = $activity['id'];
-                                $topics = $this->activity_model->get_activity_topics($act_id); 
+                                $subjects = $this->activity_model->get_activity_subjects($act_id); 
                             ?>  
-                            <?php if(!empty($topics)){ ?>
+                            <?php if(!empty($subjects)){ ?>
                             <ul class="list-group list-unstyled">
-                                <?php foreach($topics as $topic): ?>
-                                <li><a class="d-block list-group-item text-black-50 hvr-underline" href="<?php echo base_url().'training-activity/topic/'.$topic['subject_slug']; ?>"><?php echo $topic['subject_title']; ?></a></li>
+                                <?php foreach($subjects as $subject): ?>
+                                <li><a class="d-block list-group-item text-black-50 hvr-underline" href="<?php echo base_url().'training-activity/subject/'.$subject['subject_slug']; ?>"><?php echo $subject['subject_title']; ?></a></li>
                                 <?php endforeach; ?>
                             </ul> 
                             <?php }else{ ?> 
-                                <span class="font-italic">No topics found!</span>
+                                <span class="font-italic">No Subjects found!</span>
                             <?php } ?>
                         </div>
                         <div class="card-footer">

@@ -43,7 +43,25 @@ class Clients extends CI_Controller {
         $data['websitefiles_stat'] = array("Reset","Used");
  
         $data['client'] = $this->client_model->get_client($id);
-        $data['tasks'] = $this->tasks_model->get_task_bycomp($id);
+
+
+        $user_id = $data['user_info']['id'];
+
+
+        if($data['user_info']['role'] == 2){
+
+            $data['tasks'] = $this->client_model->get_task_bycomp_user($id, $user_id);
+
+        }else{
+
+            $data['tasks'] = $this->tasks_model->get_task_bycomp($id);
+
+        }
+       
+
+        
+
+
         $data['added_name'] = $this->client_model->get_client_task($data['client']['added_by']);
 
         if(empty($data['client'])){
@@ -52,9 +70,11 @@ class Clients extends CI_Controller {
         $status['stat'] = array("Pages","Launched","Layout");
         $data['client'];
         $user_id = $data['client']['added_by'];
+
         $data['user'] = $this->users_model->get_user($user_id);
         
         $data['stat'] = $status['stat'];
+        
 
         $this->form_validation->set_rules('other_access','Other Access','required');
 

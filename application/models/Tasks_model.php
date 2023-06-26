@@ -440,6 +440,34 @@ class Tasks_model extends CI_Model {
      }
 
 
+     public function create_task_tracker($data = FALSE){
+        return $this->db->insert('task_tracker', $data);
+    }
+
+
+    public function delete_task_tracker($task_id){
+        $this->db->where('task_tracker.task_id', $task_id);
+        $this->db->delete('task_tracker');
+        $result = $this->db->affected_rows(); 
+        return $result;
+    }
+
+    public function get_task_tracker($id){
+        if($id === FALSE){
+            $query = $this->db->get('task_tracker');
+            return $query->result_array();
+        }
+
+        $this->db->select('*');
+        $this->db->from('task_tracker');
+        $this->db->where('task_id', $id);
+        $this->db->join('tasks', 'tasks.id = task_tracker.task_id');
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+
     //  public function get_task_qa($id = 237){
     //     if($id === FALSE){
     //         $query = $this->db->get('task_comments');

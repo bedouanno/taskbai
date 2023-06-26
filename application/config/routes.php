@@ -17,7 +17,6 @@ $route['user/update/(:any)'] = 'users/update/$1';
 $route['users'] = 'users/index';
 
 // TASK ROUTES
-
 $route['task/errors'] = 'tasks/error_index';
 
 $route['task/delete/(:any)'] = 'tasks/delete_task/$1';
@@ -36,17 +35,26 @@ $route['attendance'] = 'attendance/index';
 // COMMENTS ROUTES
 $route['task/(:any)/comment'] = 'tasks/comment_index/$1';
 
+//Ajax
+$route['users/position'] = 'users/do_ajax_post';
+$route['positions'] = 'users/get_ajax_position';
+
 // TRAINING GUIDELINES ROUTES
-$route['training-activity/edit/topic/(:any)'] = 'training/update_topic/$1';
+$route['training-activity/edit/subject/(:any)'] = 'training/update_subject/$1';
 $route['training-activity/edit/activity/(:any)'] = 'training/update_activity/$1';
-$route['training-activity/delete/topic/(:any)'] = 'training/delete_topic/$1';
+$route['training-activity/delete/subject/(:any)'] = 'training/delete_subject/$1';
 $route['training-activity/delete/day/(:any)'] = 'training/delete_activity/$1';
-$route['training-activity/topic-list'] = 'training/view_topic_list';
-$route['training-activity/topic/(:any)'] = 'training/view_topic/$1';
-$route['training-activity/create/topic/(:any)'] = 'training/create_topic/$1';
+$route['training-activity/subject-list'] = 'training/view_subject_list';
+$route['training-activity/subject/(:any)'] = 'training/view_subject/$1';
+$route['training-activity/create/subject/(:any)'] = 'training/create_subject/$1';
 $route['training-activity/day/(:any)'] = 'training/view_day/$1';
 $route['training-activity/create'] = 'training/create_activity';
 $route['training-activity'] = 'training/index';
+
+// TOPICS
+$route['training-activity/subject/(:any)/create/topic'] = 'training/create_topic/$1';
+$route['training-activity/edit/topic/(:any)'] = 'training/update_topic/$1';
+
 
 // USER SESSIONS
 $route['login'] = 'login';

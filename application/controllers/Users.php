@@ -132,4 +132,40 @@ class Users extends CI_Controller {
         redirect('users');
     }
 
+
+    public function do_ajax_post() {
+        // Handle the AJAX POST request
+        if ($this->input->is_ajax_request()) {
+            $data = $this->input->post(); // Retrieve POST data
+            // Process the data and send response back
+            $result = $this->users_model->create_position($data);
+            
+            // Send response back
+            if ($result) {
+                $response = array(
+                    'status' => 'success',
+                    'message' => 'Data processed successfully!',
+                    'data' => $result
+                );
+            } else {
+                $response = array(
+                    'status' => 'error',
+                    'message' => 'Data processing failed!',
+                    'data' => null
+                );
+            }
+            echo json_encode($response);
+        } else {
+            show_404(); // Return a 404 error if it's not an AJAX request
+        }
+    }
+
+
+    public function get_ajax_position() {
+        $data = $this->positions_model->get_positions();
+            echo json_encode($data, TRUE);
+    }
+
+
+
 }
